@@ -26,6 +26,14 @@ class FinderService {
     def findILike(){
         Task.findAllByTitleLike("ave").each {it->println("${it.id} : ${it.title}")}
     }
-    def findMultiQuery(){
+    def findMultiQuery(TekUser tekUser){
+//        TekEvent.findAllByVolunteers('hayk')
+//        println(TekEvent.findAllByVolunteers(tekUser))
+         def f =TekEvent.findAll().findAll {
+             it?.volunteers.contains(/*TekUser.get(10)*/ tekUser)
+         }
+
+        println f
+
     }
 }

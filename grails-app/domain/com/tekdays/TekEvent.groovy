@@ -35,7 +35,7 @@ class TekEvent {
     }
 
     String toString() {
-        "$name, $city"
+        "$name"
     }
 //    // Recurring Options
 //    boolean isRecurring = false

@@ -113,7 +113,8 @@ class TaskController {
     def iLike(){
         finderService.findILike()
     }
-    def multi(){
+    /*def ff(){
         finderService.findMultiQuery()
-    }
+    }*/
+
 }

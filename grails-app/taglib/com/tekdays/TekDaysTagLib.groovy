@@ -1,5 +1,6 @@
 package com.tekdays
 class TekDaysTagLib {
+    def finderService
 //static encodeAsForTags = [tagName: 'raw']
     def pen = { attrs ->
         out << "<p> alo</p>"
@@ -39,11 +40,57 @@ class TekDaysTagLib {
             out << "</span><span style='float:right;margin-right:15px'>"
             out << "<a href='${createLink(controller:'tekUser', action:'logout')}'>"
             out << "Logout </a></span>"
-        } else{
+
+
+        } else {
             out << "<span style='float:right;margin-right:10px'>"
             out << "<a href='${createLink(controller:'tekUser', action:'login')}'>"
             out << "Login </a></span>"
         }
         out << "</div><br/>"
+    }
+
+    def organizerEvents = {
+        if (request.getSession(false) && session.user){
+            def events = TekEvent.findAllByOrganizer(session.user)
+            if (events){
+                out << "<div style='margin-left:25px; margin-top:25px; width:85%'>"
+                out << "<h3>Events you are organizing:</h3>"
+                out << "<ol>"
+                events.each{
+                    out << "<li><a href='"
+                    out << "${createLink(controller:'tekEvent',action:'show', id:it.id)}'>"
+                    out << "${it}</a></li>"
+                }
+                out << "</ol>"
+                out << "</div>"
+            }
+        }
+    }
+
+    def volunteerEvents = {
+        if (request.getSession(false) && session.user){
+            def events = TekEvent.createCriteria().list{
+                volunteers{
+                    and{
+                        eq('id', session.user?.id)
+                        eq('id', TekEvent.findByOrganizer(session.user).id)
+                    }
+
+                }
+            }
+            if (events){
+                out << "<div style='margin-left:25px; margin-top:25px; width:85%'>"
+                out << "<h3>Events you volunteered for:</h3>"
+                out << "<ul>"
+                events.each{
+                    out << "<li><a href='"
+                    out << "${createLink(controller:'tekEvent',action:'show', id:it.id)}'>"
+                    out << "${it}</a></li>"
+                }
+                out << "</ul>"
+                out << "</div>"
+            }
+        }
     }
 }
