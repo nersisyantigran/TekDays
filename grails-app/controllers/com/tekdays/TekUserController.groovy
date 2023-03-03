@@ -103,25 +103,28 @@ class TekUserController {
 
     def login() {
         if (params.cName)
-            return [cName:params.cName, aName:params.aName]
+            return [cName: params.cName, aName: params.aName, 'id': params.id]
     }
 
     def logout = {
         session.user = null
-        redirect(uri:'/')
+        redirect(uri: '/')
     }
 
     def validate() {
+
         def user = TekUser.findByUserName(params.username)
-        if (user && user.password == params.password){
+        if (user && user.password == params.password) {
             session.user = user
-            if (params.cName)
-                redirect controller:params.cName, action:params.aName
-            else
+            if (params.cName) {
+                redirect (controller: params.cName, action: params.aName, id: params.id)
+
+            } else {
                 redirect uri: '/'
-        } else{
+            }
+        } else {
             flash.message = "Invalid username and password."
-            render view:'login'
+            render view: 'login'
         }
     }
 }

@@ -124,6 +124,7 @@ class TekMessageController {
             render "No message found with id: ${params.id}"
         }
     }
+
     def reply = {
         def parent = TekMessage.get(params.id)
         def tekMessageInstance = new TekMessage(parent:parent, event:parent.event,

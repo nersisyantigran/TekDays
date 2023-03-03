@@ -13,6 +13,14 @@ class TaskService {
 
     }
 
+
+
+    def respondents(TekEvent event){
+
+        def resp = (event.respondents as String).split(",")
+        event.respondents = resp as Set
+    }
+
     def addDefaultTasks(TekEvent tekEvent) {
         LOGGER.info("We only want to add tasks to a new event {}", tekEvent.name)
         if (tekEvent.tasks?.size() > 0)

@@ -117,7 +117,7 @@
 
     <ul class="one-to-many">
         <g:each in="${tekEventInstance?.messages ?}" var="m">
-            <li><g:link controller="tekMessage" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link></li>
+            <g:link controller="tekMessage" action="show" id="${m.id}">${m?.encodeAsHTML()}</g:link>
         </g:each>
         <li class="add">
             <g:link controller="tekMessage" action="create"
@@ -130,5 +130,9 @@
     <label for="respondents">
         <g:message code="tekEvent.respondents.label" default="Respondents"/>
     </label>
-</div>
-
+    <g:if test="${params.action == 'create'}">
+        <g:textField name="respondents" required="" value="${tekEventInstance?.respondents}"/>
+    </g:if>
+<g:else>
+    <g:textField name="respondents" required="" value="${(tekEventInstance?.respondents as java.lang.String).replace("[",'').replace("]",'')}"/>
+</g:else>

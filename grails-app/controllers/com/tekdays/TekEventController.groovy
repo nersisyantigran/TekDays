@@ -37,6 +37,7 @@ class TekEventController {
         }
 
         tekEventInstance.save flush: true
+        taskService.respondents(tekEventInstance)
 
         taskService.addDefaultTasks(tekEventInstance)
 

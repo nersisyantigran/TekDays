@@ -205,11 +205,13 @@
 
         <g:if test="${tekEventInstance?.respondents}">
             <li class="fieldcontain">
-                <span id="respondents-label" class="property-label"><g:message code="tekEvent.respondents.label"
-                                                                               default="Respondents"/></span>
+                <span id="respondents-label" class="property-label">
+                    <g:message code="tekEvent.respondents.label" default="Respondents"/>
+                </span>
 
-                <span class="property-value" aria-labelledby="respondents-label"><g:fieldValue
-                        bean="${tekEventInstance}" field="respondents"/></span>
+                <span class="property-value" aria-labelledby="respondents-label">
+                    ${(tekEventInstance?.respondents as String).replace("[","").replace("]","")}
+                </span>
 
             </li>
         </g:if>
