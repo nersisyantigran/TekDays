@@ -8,6 +8,8 @@ import grails.transaction.Transactional
 class TekEventController {
 
     TaskService taskService
+    EventService eventService
+    RevisionsService revisionsService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -37,17 +39,7 @@ class TekEventController {
         }
 
         tekEventInstance.save flush: true
-        taskService.respondents(tekEventInstance)
-
-        taskService.addDefaultTasks(tekEventInstance)
-
-//        request.withFormat {
-//            form multipartForm {
-//                flash.message = message(code: 'default.created.message', args: [message(code: 'tekEvent.label', default: 'TekEvent'), tekEventInstance.id])
-//                redirect tekEventInstance
-//            }
-//            '*' { respond tekEventInstance, [status: CREATED] }
-//        }
+        eventService.addRespondents(tekEventInstance)
 
         request.withFormat {
             form {
@@ -75,8 +67,8 @@ class TekEventController {
             respond tekEventInstance.errors, view: 'edit'
             return
         }
-
         tekEventInstance.save flush: true
+        eventService.addRespondents(tekEventInstance)
 
         request.withFormat {
             form multipartForm {
@@ -114,5 +106,17 @@ class TekEventController {
             }
             '*' { render status: NOT_FOUND }
         }
+    }
+    @Transactional
+    def volunteer (){
+        def event = TekEvent.get(params.id)
+        event.addToVolunteers(session.user)
+        event.city = "amsterdam"
+        event.save(flush : true)
+        render "Thank you for Volunteering"
+    }
+    def revision(){
+        revisionsService.revisions()
+
     }
 }

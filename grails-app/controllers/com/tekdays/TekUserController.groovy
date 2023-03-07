@@ -6,6 +6,7 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class TekUserController {
+    RevisionsService revisionsService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -126,5 +127,10 @@ class TekUserController {
             flash.message = "Invalid username and password."
             render view: 'login'
         }
+    }
+    def revision(){
+       def v= revisionsService.revisions(TekUser.class)
+        render(v)
+
     }
 }

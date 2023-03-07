@@ -54,11 +54,15 @@ grails.project.dependency.resolution = {
         test "org.grails:grails-datastore-test-support:1.0.2-grails-2.4"
 
         runtime 'org.slf4j:slf4j-api:1.7.21'
+        compile('org.hibernate:hibernate-envers:4.3.11.Final') {
+            transitive = false
+        }
+
     }
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.70" // or ":tomcat:8.0.22"
+        build ":tomcat:8.0.22" // or ":tomcat:8.0.22"
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
@@ -66,6 +70,7 @@ grails.project.dependency.resolution = {
         // asset-pipeline 2.0+ requires Java 7, use version 1.9.x with Java 6
         compile ":asset-pipeline:2.5.7"
         compile ':calendar:1.2.1'
+        compile ":jquery-ui:1.8.24"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.10" // or ":hibernate:3.6.10.18"

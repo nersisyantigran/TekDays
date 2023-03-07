@@ -6,6 +6,7 @@
 // to create separate JavaScript files as needed.
 //
 //= require jquery
+//= require jquery-ui-1.8.24
 //= require_tree .
 //= require_self
 

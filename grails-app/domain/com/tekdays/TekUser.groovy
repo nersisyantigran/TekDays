@@ -1,5 +1,7 @@
 package com.tekdays
 
+import org.hibernate.envers.Audited
+
 class TekUser {
 
     String fullName
