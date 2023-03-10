@@ -11,4 +11,5 @@
 *= require jquery-ui-1.8.24
 *= require mobile
 *= require_self
+*= datatables
 */

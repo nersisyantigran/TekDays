@@ -9,6 +9,7 @@
 //= require jquery-ui-1.8.24
 //= require_tree .
 //= require_self
+//= datatables
 
 if (typeof jQuery !== 'undefined') {
 	(function($) {

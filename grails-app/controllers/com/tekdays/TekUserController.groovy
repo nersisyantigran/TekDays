@@ -7,6 +7,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class TekUserController {
     RevisionsService revisionsService
+    def datatablesSourceService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -133,4 +134,13 @@ class TekUserController {
         render(v)
 
     }
+
+    def dtList() {}
+
+    def dataTablesRenderer() {
+        def propertiesToRender = ['<list of fields to be rendered>']
+        def entityName = '<Domain name>'
+        render  datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+    }
+
 }

@@ -10,7 +10,16 @@ class TekEventController {
     TaskService taskService
     EventService eventService
     RevisionsService revisionsService
+    DatatablesSourceService datatablesSourceService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+
+
+    def dataTablesRenderer() {
+        def propertiesToRender = ["name", "city", "description", "venue", "startDate", "endDate","id"]
+        def entityName = 'TekEvent'
+        render  datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+    }
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -119,4 +128,8 @@ class TekEventController {
         revisionsService.revisions()
 
     }
+    def dtList() {}
+
+
+
 }
