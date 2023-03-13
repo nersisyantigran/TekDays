@@ -96,6 +96,7 @@ class DatatablesSourceService implements GrailsApplicationAware {
             dataToRender.aaData << data
         }
 
+        println sortingCols
         return dataToRender as JSON
     }
 }

@@ -124,12 +124,12 @@ class TekEventController {
         event.save(flush : true)
         render "Thank you for Volunteering"
     }
+    @Transactional
     def revision(){
-        revisionsService.revisions()
+        def v= revisionsService.revisions(TekEvent.class)
+        render(v)
 
     }
-    def dtList() {}
-
 
 
 }

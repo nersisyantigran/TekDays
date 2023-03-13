@@ -129,18 +129,17 @@ class TekUserController {
             render view: 'login'
         }
     }
+   /* @Transactional
     def revision(){
        def v= revisionsService.revisions(TekUser.class)
         render(v)
 
-    }
+    }*/
 
-    def dtList() {}
-
-    def dataTablesRenderer() {
-        def propertiesToRender = ['<list of fields to be rendered>']
-        def entityName = '<Domain name>'
-        render  datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
-    }
+//    def dataTablesRenderer() {
+//        def propertiesToRender = ['<list of fields to be rendered>']
+//        def entityName = '<Domain name>'
+//        render  datatablesSourceService.dataTablesSource(propertiesToRender, entityName, params)
+//    }
 
 }

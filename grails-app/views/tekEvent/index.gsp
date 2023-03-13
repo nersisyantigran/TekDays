@@ -19,9 +19,10 @@
 				sPaginationType: "full_numbers",
 				aLengthMenu: [5, 10, 25, 50, 100, 200],
 				iDisplayLength: 10,
+				"aaSorting": [[0, 'desc'], [1, 'asc'], [2, 'desc'],[3, 'asc'],[4, 'desc']],
 				aoColumnDefs: [
 					{
-						// bSearchable: false,
+						bSearchable: false,
 						render: function (data, type, full, meta) {
 							if (full) {
 								return '<a href="${createLink(controller: 'TekEvent', action: 'show')}/' + data + '"class="btn">' + data + '</a>';
@@ -30,7 +31,9 @@
 							}
 						},
 						visible: false,
-						aTargets: [6]
+						aTargets: [6],
+						bSearchable: false,
+						bSortable: true
 
 					},	{
 						// bSearchable: false,
@@ -38,7 +41,7 @@
 						render: function (data, type, full, meta) {
 							console.log(full)
 							if (full) {
-								console.log(data+"zzzzzzzzzzzz")
+								// console.log(data+"zzzzzzzzzzzz")
 								return '<a href="${createLink(controller: 'TekEvent', action: 'show')}/' + full[6] + '"class="btn">' + data + '</a>';
 							} else {
 								return data;
@@ -56,10 +59,11 @@
 							// console.log(col)
 							$(td).attr('style', 'color: #071C76;');
 						},
-						// bSearchable: false,
-						bSortable: false,
+						bSearchable: false,
+						bSortable: true,
 						visible: true,
 						aTargets: [1, 2,3]
+
 					},{
 						aTargets: [4],
 						visible: true,
